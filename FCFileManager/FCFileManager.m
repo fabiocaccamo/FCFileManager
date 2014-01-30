@@ -12,22 +12,22 @@
 
 static NSMutableArray *_absoluteDirectories = nil;
 
-static NSString *_applicationSupportDirectory = nil;
-static NSString *_cachesDirectory = nil;
-static NSString *_documentsDirectory = nil;
-static NSString *_mainBundleDirectory = nil;
-static NSString *_temporaryDirectory = nil;
+static NSString *_pathForApplicationSupportDirectory = nil;
+static NSString *_pathForCachesDirectory = nil;
+static NSString *_pathForDocumentsDirectory = nil;
+static NSString *_pathForMainBundleDirectory = nil;
+static NSString *_pathForTemporaryDirectory = nil;
 
 
 +(NSMutableArray *)absoluteDirectories
 {
     if(!_absoluteDirectories){
         _absoluteDirectories = [NSMutableArray arrayWithObjects:
-                                [self applicationSupportDirectory],
-                                [self cachesDirectory],
-                                [self documentsDirectory],
-                                [self mainBundleDirectory],
-                                [self temporaryDirectory],
+                                [self pathForApplicationSupportDirectory],
+                                [self pathForCachesDirectory],
+                                [self pathForDocumentsDirectory],
+                                [self pathForMainBundleDirectory],
+                                [self pathForTemporaryDirectory],
                                 nil];
         
         [_absoluteDirectories sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
@@ -75,101 +75,9 @@ static NSString *_temporaryDirectory = nil;
         return path;
     }
     else {
-        return [self documentsDirectoryWithPath:path];
+        return [self pathForDocumentsDirectoryWithPath:path];
     }
 }
-
-
-+(NSString *)applicationSupportDirectory
-{
-    if(!_applicationSupportDirectory)
-    {
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
-        
-        _applicationSupportDirectory = [paths lastObject];
-    }
-    
-    return _applicationSupportDirectory;
-}
-
-
-+(NSString *)applicationSupportDirectoryWithPath:(NSString *)path
-{
-    return [[FCFileManager applicationSupportDirectory] stringByAppendingPathComponent:path];
-}
-
-
-+(NSString *)cachesDirectory
-{
-    if(!_cachesDirectory)
-    {
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-        
-        _cachesDirectory = [paths lastObject];
-    }
-    
-    return _cachesDirectory;
-}
-
-
-+(NSString *)cachesDirectoryWithPath:(NSString *)path
-{
-    return [[FCFileManager cachesDirectory] stringByAppendingPathComponent:path];
-}
-
-
-+(NSString *)documentsDirectory
-{
-    if(!_documentsDirectory)
-    {
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        
-        _documentsDirectory = [paths lastObject];
-    }
-    
-    return _documentsDirectory;
-}
-
-
-+(NSString *)documentsDirectoryWithPath:(NSString *)path
-{
-    return [[FCFileManager documentsDirectory] stringByAppendingPathComponent:path];
-}
-
-
-+(NSString *)mainBundleDirectory
-{
-    if(!_mainBundleDirectory){
-        _mainBundleDirectory = [NSBundle mainBundle].resourcePath;
-    }
-    
-    return _mainBundleDirectory;
-}
-
-
-+(NSString *)mainBundleDirectoryWithPath:(NSString *)path
-{
-    return [[FCFileManager mainBundleDirectory] stringByAppendingPathComponent:path];
-}
-
-
-+(NSString *)temporaryDirectory
-{
-    if(!_temporaryDirectory){
-        _temporaryDirectory = NSTemporaryDirectory();
-    }
-    
-    return _temporaryDirectory;
-}
-
-
-+(NSString *)temporaryDirectoryWithPath:(NSString *)path 
-{
-    return [[FCFileManager temporaryDirectory] stringByAppendingPathComponent:path];
-}
-
-
-
 
 
 +(BOOL)copyFileAtPath:(NSString *)path toPath:(NSString *)toPath
@@ -313,6 +221,95 @@ static NSString *_temporaryDirectory = nil;
     }
     
     return NO;
+}
+
+
++(NSString *)pathForApplicationSupportDirectory
+{
+    if(!_pathForApplicationSupportDirectory)
+    {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+        
+        _pathForApplicationSupportDirectory = [paths lastObject];
+    }
+    
+    return _pathForApplicationSupportDirectory;
+}
+
+
++(NSString *)pathForApplicationSupportDirectoryWithPath:(NSString *)path
+{
+    return [[FCFileManager pathForApplicationSupportDirectory] stringByAppendingPathComponent:path];
+}
+
+
++(NSString *)pathForCachesDirectory
+{
+    if(!_pathForCachesDirectory)
+    {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+        
+        _pathForCachesDirectory = [paths lastObject];
+    }
+    
+    return _pathForCachesDirectory;
+}
+
+
++(NSString *)pathForCachesDirectoryWithPath:(NSString *)path
+{
+    return [[FCFileManager pathForCachesDirectory] stringByAppendingPathComponent:path];
+}
+
+
++(NSString *)pathForDocumentsDirectory
+{
+    if(!_pathForDocumentsDirectory)
+    {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        
+        _pathForDocumentsDirectory = [paths lastObject];
+    }
+    
+    return _pathForDocumentsDirectory;
+}
+
+
++(NSString *)pathForDocumentsDirectoryWithPath:(NSString *)path
+{
+    return [[FCFileManager pathForDocumentsDirectory] stringByAppendingPathComponent:path];
+}
+
+
++(NSString *)pathForMainBundleDirectory
+{
+    if(!_pathForMainBundleDirectory){
+        _pathForMainBundleDirectory = [NSBundle mainBundle].resourcePath;
+    }
+    
+    return _pathForMainBundleDirectory;
+}
+
+
++(NSString *)pathForMainBundleDirectoryWithPath:(NSString *)path
+{
+    return [[FCFileManager pathForMainBundleDirectory] stringByAppendingPathComponent:path];
+}
+
+
++(NSString *)pathForTemporaryDirectory
+{
+    if(!_pathForTemporaryDirectory){
+        _pathForTemporaryDirectory = NSTemporaryDirectory();
+    }
+    
+    return _pathForTemporaryDirectory;
+}
+
+
++(NSString *)pathForTemporaryDirectoryWithPath:(NSString *)path
+{
+    return [[FCFileManager pathForTemporaryDirectory] stringByAppendingPathComponent:path];
 }
 
 
@@ -573,3 +570,4 @@ static NSString *_temporaryDirectory = nil;
 
 
 @end
+
