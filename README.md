@@ -22,16 +22,16 @@ FCFileManager
 **Build path:**
 ```objc
 //my file path, this will be automatically used as it's relative to the Documents directory
-NSString *path = @"test.txt";
+NSString *testPath = @"test.txt";
 //my file path relative to the temporary directory path
-NSString *pathTemp = [FCFileManager pathForTemporaryDirectoryWithPath:path];
+NSString *testPathTemp = [FCFileManager pathForTemporaryDirectoryWithPath:testPath];
 ```
 
 **Copy file:**
 ```objc
 //copy file from Documents directory (public) to ApplicationSupport directory (private)
-NSString *path = [FCFileManager pathForApplicationSupportDirectoryWithPath:@"test-copy.txt"];
-[FCFileManager copyFileAtPath:@"test.txt" toPath:path];
+NSString *testPath = [FCFileManager pathForApplicationSupportDirectoryWithPath:@"test-copy.txt"];
+[FCFileManager copyFileAtPath:@"test.txt" toPath:testPath];
 ```
 
 **Create file:**
@@ -82,10 +82,12 @@ NSString *test = [FCFileManager readFileAtPath:@"test.txt"];
 [FCFileManager renameFileAtPath:@"test.txt" withName:@"test-renamed.txt"];
 ```
 
-**Rename file:**
+**Write file:**
 ```objc
+NSArray *testContent = [NSArray arrayWithObjects:@"t", @"e", @"s", @"t", nil];
+
 //write file at the specified path with content
-[FCFileManager writeFileAtPath:@"test.txt" content:@"test-renamed.txt"];
+[FCFileManager writeFileAtPath:@"test.txt" content:testContent];
 ```
 
 #TODO
