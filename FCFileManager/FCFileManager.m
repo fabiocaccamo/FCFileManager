@@ -45,6 +45,11 @@ static NSString *_temporaryDirectory = nil;
 
 +(NSString *)absoluteDirectoryForPath:(NSString *)path
 {
+    if(!path || [path isEqualToString:@""] || [path isEqualToString:@"/"])
+    {
+        return nil;
+    }
+    
     NSMutableArray *directories = [self absoluteDirectories];
     
     for(NSString *directory in directories)
