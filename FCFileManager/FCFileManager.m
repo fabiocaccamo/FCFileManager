@@ -180,11 +180,29 @@ static NSString *_pathForTemporaryDirectory = nil;
 }
 
 
++(NSArray *)listContentOfPath:(NSString *)path deep:(BOOL)deep
+{
+    NSString *filePath = [self absolutePath:path];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *filePathSubpaths;
+    
+    if(deep)
+    {
+        filePathSubpaths = [fileManager subpathsOfDirectoryAtPath:filePath error:nil];
+    }
+    else {
+        filePathSubpaths = [fileManager contentsOfDirectoryAtPath:filePath error:nil];
+    }
+    
+    return filePathSubpaths;
+}
+
+
 +(NSArray *)listFilesAtPath:(NSString *)path withExtension:(NSString *)extension
 {
-    NSArray *subpaths = [self subpathsOfPath:path deep:NO];
+    NSArray *pathContent = [self listContentOfPath:path deep:NO];
     
-    return [subpaths filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+    return [pathContent filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
         
         NSString *subpath = (NSString *)evaluatedObject;
         NSString *subpathExtension = [[subpath pathExtension] lowercaseString];
@@ -315,13 +333,13 @@ static NSString *_pathForTemporaryDirectory = nil;
 
 +(NSString *)readFileAtPath:(NSString *)path
 {
-    return [self readFileAtPath:path error:nil];
+    return [self readFileAtPathAsString:path error:nil];
 }
 
 
 +(NSString *)readFileAtPath:(NSString *)path error:(NSError *)error
 {
-    return [NSString stringWithContentsOfFile:[self absolutePath:path] encoding:NSUTF8StringEncoding error:&error];
+    return [self readFileAtPathAsString:path error:error];
 }
 
 
@@ -393,33 +411,25 @@ static NSString *_pathForTemporaryDirectory = nil;
 }
 
 
-+(BOOL)removeFileAtPath:(NSString *)path
++(NSString *)readFileAtPathAsString:(NSString *)path
 {
-    return [self removeFileAtPath:path error:nil];
+    return [self readFileAtPath:path error:nil];
 }
 
 
-+(BOOL)removeFileAtPath:(NSString *)path error:(NSError *)error
++(NSString *)readFileAtPathAsString:(NSString *)path error:(NSError *)error
 {
-    NSString *filePath = [self absolutePath:path];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    
-    if([fileManager removeItemAtPath:filePath error:&error])
-    {
-        return YES;
-    }
-    
-    return NO;
+    return [NSString stringWithContentsOfFile:[self absolutePath:path] encoding:NSUTF8StringEncoding error:&error];
 }
 
 
-+(BOOL)removeFilesInSubpathsOfPath:(NSString *)path
++(BOOL)removeContentOfPath:(NSString *)path
 {
-    return [self removeFilesInSubpathsOfPath:path error:nil];
+    return [self removeContentOfPath:path error:nil];
 }
 
 
-+(BOOL)removeFilesInSubpathsOfPath:(NSString *)path error:(NSError *)error
++(BOOL)removeContentOfPath:(NSString *)path error:(NSError *)error
 {
     NSString *filePath = [self absolutePath:path];
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -445,6 +455,26 @@ static NSString *_pathForTemporaryDirectory = nil;
     }
     
     return YES;
+}
+
+
++(BOOL)removeFileAtPath:(NSString *)path
+{
+    return [self removeFileAtPath:path error:nil];
+}
+
+
++(BOOL)removeFileAtPath:(NSString *)path error:(NSError *)error
+{
+    NSString *filePath = [self absolutePath:path];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    if([fileManager removeItemAtPath:filePath error:&error])
+    {
+        return YES;
+    }
+    
+    return NO;
 }
 
 
@@ -479,24 +509,6 @@ static NSString *_pathForTemporaryDirectory = nil;
     }
     
     return NO;
-}
-
-
-+(NSArray *)subpathsOfPath:(NSString *)path deep:(BOOL)deep
-{
-    NSString *filePath = [self absolutePath:path];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSArray *filePathSubpaths;
-    
-    if(deep)
-    {
-        filePathSubpaths = [fileManager subpathsOfDirectoryAtPath:filePath error:nil];
-    }
-    else {
-        filePathSubpaths = [fileManager contentsOfDirectoryAtPath:filePath error:nil];
-    }
-    
-    return  filePathSubpaths;
 }
 
 

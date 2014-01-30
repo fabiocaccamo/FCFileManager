@@ -24,6 +24,7 @@
 +(BOOL)existsFileAtPath:(NSString *)path;
 
 
++(NSArray *)listContentOfPath:(NSString *)path deep:(BOOL)deep;
 +(NSArray *)listFilesAtPath:(NSString *)path withExtension:(NSString *)extension;
 
 
@@ -67,19 +68,19 @@
 
 +(NSMutableDictionary *)readFileAtPathAsMutableDictionary:(NSString *)path;
 
++(NSString *)readFileAtPathAsString:(NSString *)path;
++(NSString *)readFileAtPathAsString:(NSString *)path error:(NSError *)error;
+
+
++(BOOL)removeContentOfPath:(NSString *)path;
++(BOOL)removeContentOfPath:(NSString *)path error:(NSError *)error;
 
 +(BOOL)removeFileAtPath:(NSString *)path;
 +(BOOL)removeFileAtPath:(NSString *)path error:(NSError *)error;
 
-+(BOOL)removeFilesInSubpathsOfPath:(NSString *)path;
-+(BOOL)removeFilesInSubpathsOfPath:(NSString *)path error:(NSError *)error;
-
 
 +(BOOL)renameFileAtPath:(NSString *)path withName:(NSString *)name;
 +(BOOL)renameFileAtPath:(NSString *)path withName:(NSString *)name error:(NSError *)error;
-
-
-+(NSArray *)subpathsOfPath:(NSString *)path deep:(BOOL)deep;
 
 
 +(BOOL)writeFileAtPath:(NSString *)path content:(NSObject *)content;
