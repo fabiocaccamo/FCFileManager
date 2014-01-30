@@ -36,6 +36,8 @@
 
 +(BOOL)existsFileAtPath:(NSString *)path;
 
++(NSArray *)listFilesAtPath:(NSString *)path withExtension:(NSString *)extension;
+
 +(BOOL)moveFileAtPath:(NSString *)path toPath:(NSString *)toPath;
 +(BOOL)moveFileAtPath:(NSString *)path toPath:(NSString *)toPath error:(NSError *)error;
 

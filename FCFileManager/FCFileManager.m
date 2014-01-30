@@ -267,6 +267,26 @@ static NSString *_temporaryDirectory = nil;
 }
 
 
++(NSArray *)listFilesAtPath:(NSString *)path withExtension:(NSString *)extension
+{
+    NSArray *subpaths = [self subpathsOfPath:path deep:NO];
+    
+    return [subpaths filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        
+        NSString *subpath = (NSString *)evaluatedObject;
+        NSString *subpathExtension = [[subpath pathExtension] lowercaseString];
+        NSString *filterExtension = [extension lowercaseString];
+        
+        if([subpathExtension isEqualToString:filterExtension])
+        {
+            return YES;
+        }
+        
+        return NO;
+    }]];
+}
+
+
 +(BOOL)moveFileAtPath:(NSString *)path toPath:(NSString *)toPath
 {
     return [self moveFileAtPath:path toPath:toPath error:nil];
