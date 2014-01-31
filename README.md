@@ -8,6 +8,9 @@ FCFileManager
 - Copy files
 - Create files
 - Check if files exist
+- Get file attributes
+- Get file creation date
+- Get file size
 - List files (filtered by extension) or directory content
 - Move files
 - Read files content as: NSArray, NSData, NSDictionary, NSString...
@@ -36,7 +39,7 @@ NSString *testPath = [FCFileManager pathForApplicationSupportDirectoryWithPath:@
 
 **Create file:**
 ```objc
-//create file and write content to it (if it doesn't exixt)
+//create file and write content to it (if it doesn't exist)
 [FCFileManager createFileAtPath:@"test.txt" withContent:@"File management has never been so easy!!!"];
 ```
 
@@ -44,6 +47,21 @@ NSString *testPath = [FCFileManager pathForApplicationSupportDirectoryWithPath:@
 ```objc
 //check if file exist and returns YES or NO
 BOOL testFileExists = [FCFileManager existsFileAtPath:@"test.txt"];
+```
+
+**Get file attributes:**
+```objc
+NSDictionary *testAttributes = [FCFileManager attributesOfFileAtPath:@"test.txt"];
+```
+
+**Get file creation date:**
+```objc
+[FCFileManager creationDateOfFileAtPath:@"test.txt"];
+```
+
+**Get file size:**
+```objc
+[FCFileManager sizeOfFileAtPath:@"test.txt"];
 ```
 
 **List directory content or files (filtered by extension):**

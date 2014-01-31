@@ -80,6 +80,34 @@ static NSString *_pathForTemporaryDirectory = nil;
 }
 
 
++(id)attributeOfFileAtPath:(NSString *)path forKey:(NSString *)key
+{
+    return [[self attributesOfFileAtPath:path] objectForKey:key];
+}
+
+
++(id)attributeOfFileAtPath:(NSString *)path forKey:(NSString *)key error:(NSError *)error
+{
+    return [[self attributesOfFileAtPath:path error:error] objectForKey:key];
+}
+
+
++(NSDictionary *)attributesOfFileAtPath:(NSString *)path
+{
+    return [self attributesOfFileAtPath:path error:nil];
+}
+
+
++(NSDictionary *)attributesOfFileAtPath:(NSString *)path error:(NSError *)error
+{
+    NSString *filePath = [self absolutePath:path];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSDictionary *attributes = [fileManager attributesOfItemAtPath:filePath error:&error];
+    
+    return attributes;
+}
+
+
 +(BOOL)copyFileAtPath:(NSString *)path toPath:(NSString *)toPath
 {
     return [self copyFileAtPath:path toPath:toPath error:nil];
@@ -163,6 +191,18 @@ static NSString *_pathForTemporaryDirectory = nil;
     }
     
     return NO;
+}
+
+
++(NSDate *)creationDateOfFileAtPath:(NSString *)path
+{
+    return [self creationDateOfFileAtPath:path error:nil];
+}
+
+
++(NSDate *)creationDateOfFileAtPath:(NSString *)path error:(NSError *)error
+{
+    return (NSDate *)[self attributeOfFileAtPath:path forKey:NSFileCreationDate error:error];
 }
 
 
@@ -509,6 +549,18 @@ static NSString *_pathForTemporaryDirectory = nil;
     }
     
     return NO;
+}
+
+
++(NSNumber *)sizeOfFileAtPath:(NSString *)path
+{
+    return [self sizeOfFileAtPath:path error:nil];
+}
+
+
++(NSNumber *)sizeOfFileAtPath:(NSString *)path error:(NSError *)error
+{
+    return (NSNumber *)[self attributeOfFileAtPath:path forKey:NSFileSize error:error];
 }
 
 
