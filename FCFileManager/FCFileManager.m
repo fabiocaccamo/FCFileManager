@@ -587,13 +587,25 @@ static NSString *_pathForTemporaryDirectory = nil;
     
     @try
     {
-        if([content isKindOfClass:[NSArray class]])
+        if([content isKindOfClass:[NSMutableArray class]])
+        {
+            [((NSMutableArray *)content) writeToFile:filePath atomically:YES];
+        }
+        else if([content isKindOfClass:[NSArray class]])
         {
             [((NSArray *)content) writeToFile:filePath atomically:YES];
+        }
+        else if([content isKindOfClass:[NSMutableData class]])
+        {
+            [((NSMutableData *)content) writeToFile:filePath atomically:YES];
         }
         else if([content isKindOfClass:[NSData class]])
         {
             [((NSData *)content) writeToFile:filePath atomically:YES];
+        }
+        else if([content isKindOfClass:[NSMutableDictionary class]])
+        {
+            [((NSMutableDictionary *)content) writeToFile:filePath atomically:YES];
         }
         else if([content isKindOfClass:[NSDictionary class]])
         {
@@ -603,23 +615,11 @@ static NSString *_pathForTemporaryDirectory = nil;
         {
             [((NSDictionary *)content) writeToFile:filePath atomically:YES];
         }
-        else if([content isKindOfClass:[NSString class]])
+        else if([content isKindOfClass:[NSMutableString class]])
         {
             [[((NSString *)content) dataUsingEncoding:NSUTF8StringEncoding] writeToFile:filePath atomically:YES];
         }
-        else if([content isKindOfClass:[NSMutableArray class]])
-        {
-            [((NSMutableArray *)content) writeToFile:filePath atomically:YES];
-        }
-        else if([content isKindOfClass:[NSMutableData class]])
-        {
-            [((NSMutableData *)content) writeToFile:filePath atomically:YES];
-        }
-        else if([content isKindOfClass:[NSMutableDictionary class]])
-        {
-            [((NSMutableDictionary *)content) writeToFile:filePath atomically:YES];
-        }
-        else if([content isKindOfClass:[NSMutableString class]])
+        else if([content isKindOfClass:[NSString class]])
         {
             [[((NSString *)content) dataUsingEncoding:NSUTF8StringEncoding] writeToFile:filePath atomically:YES];
         }
