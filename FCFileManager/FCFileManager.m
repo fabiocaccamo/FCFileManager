@@ -564,6 +564,15 @@ static NSString *_pathForTemporaryDirectory = nil;
 }
 
 
++(NSURL *)urlForFileAtPath:(NSString *)path
+{
+    NSString *filePath = [self absolutePath:path];
+    NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+    
+    return fileURL;
+}
+
+
 +(BOOL)writeFileAtPath:(NSString *)path content:(NSObject *)content
 {
     return [self writeFileAtPath:path content:content error:nil];

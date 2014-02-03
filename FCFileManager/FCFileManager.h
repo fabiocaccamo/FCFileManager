@@ -85,9 +85,10 @@
 +(NSNumber *)sizeOfFileAtPath:(NSString *)path;
 +(NSNumber *)sizeOfFileAtPath:(NSString *)path error:(NSError *)error;
 
++(NSURL *)urlForFileAtPath:(NSString *)path;
+
 +(BOOL)writeFileAtPath:(NSString *)path content:(NSObject *)content;
 +(BOOL)writeFileAtPath:(NSString *)path content:(NSObject *)content error:(NSError *)error;
-
 
 @end
 
