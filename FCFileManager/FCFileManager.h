@@ -29,6 +29,12 @@
 
 +(BOOL)existsFileAtPath:(NSString *)path;
 
++(BOOL)isEmptyFileAtPath:(NSString *)path;
++(BOOL)isEmptyFileAtPath:(NSString *)path error:(NSError *)error;
++(BOOL)isExecutableFileAtPath:(NSString *)path;
++(BOOL)isReadableFileAtPath:(NSString *)path;
++(BOOL)isWritableFileAtPath:(NSString *)path;
+
 +(NSArray *)listContentOfPath:(NSString *)path deep:(BOOL)deep;
 +(NSArray *)listFilesAtPath:(NSString *)path withExtension:(NSString *)extension;
 

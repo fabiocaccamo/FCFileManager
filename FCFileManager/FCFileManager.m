@@ -220,6 +220,51 @@ static NSString *_pathForTemporaryDirectory = nil;
 }
 
 
++(BOOL)isEmptyFileAtPath:(NSString *)path
+{
+    return [self isEmptyFileAtPath:path error:nil];
+}
+
+
++(BOOL)isEmptyFileAtPath:(NSString *)path error:(NSError *)error
+{
+    if([[self sizeOfFileAtPath:path error:error] intValue] == 0)
+    {
+        return YES;
+    }
+    else {
+        return NO;
+    }
+}
+
+
++(BOOL)isExecutableFileAtPath:(NSString *)path
+{
+    NSString *filePath = [self absolutePath:path];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    return [fileManager isExecutableFileAtPath:filePath];
+}
+
+
++(BOOL)isReadableFileAtPath:(NSString *)path
+{
+    NSString *filePath = [self absolutePath:path];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    return [fileManager isReadableFileAtPath:filePath];
+}
+
+
++(BOOL)isWritableFileAtPath:(NSString *)path
+{
+    NSString *filePath = [self absolutePath:path];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    return [fileManager isWritableFileAtPath:filePath];
+}
+
+
 +(NSArray *)listContentOfPath:(NSString *)path deep:(BOOL)deep
 {
     NSString *filePath = [self absolutePath:path];
