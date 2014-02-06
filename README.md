@@ -36,7 +36,7 @@ NSString *testPathTemp = [FCFileManager pathForTemporaryDirectoryWithPath:testPa
 ```objc
 //copy file from Documents directory (public) to ApplicationSupport directory (private)
 NSString *testPath = [FCFileManager pathForApplicationSupportDirectoryWithPath:@"test-copy.txt"];
-[FCFileManager copyFileAtPath:@"test.txt" toPath:testPath];
+[FCFileManager copyItemAtPath:@"test.txt" toPath:testPath];
 ```
 
 **Create file:**
@@ -45,7 +45,7 @@ NSString *testPath = [FCFileManager pathForApplicationSupportDirectoryWithPath:@
 [FCFileManager createFileAtPath:@"test.txt" withContent:@"File management has never been so easy!!!"];
 ```
 
-**Check if file exist:**
+**Check if file exists:**
 ```objc
 //check if file exist and returns YES or NO
 BOOL testFileExists = [FCFileManager existsItemAtPath:@"test.txt"];
@@ -63,7 +63,7 @@ BOOL testFileExists = [FCFileManager existsItemAtPath:@"test.txt"];
 NSString *test = [FCFileManager readFileAtPath:@"test.txt"];
 ```
 
-**Remove files or directory content:**
+**Remove file:**
 ```objc
 //remove file at the specified path
 [FCFileManager removeItemAtPath:@"test.txt"];
