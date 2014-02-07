@@ -149,6 +149,12 @@ NSArray *testContent = [NSArray arrayWithObjects:@"t", @"e", @"s", @"t", nil];
 
 +(NSDictionary *)readFileAtPathAsDictionary:(NSString *)path;
 
++(UIImage *)readFileAtPathAsImage:(NSString *)path;
++(UIImage *)readFileAtPathAsImage:(NSString *)path error:(NSError **)error;
+
++(UIImageView *)readFileAtPathAsImageView:(NSString *)path;
++(UIImageView *)readFileAtPathAsImageView:(NSString *)path error:(NSError **)error;
+
 +(NSDictionary *)readFileAtPathAsJSON:(NSString *)path;
 +(NSDictionary *)readFileAtPathAsJSON:(NSString *)path error:(NSError **)error;
 

@@ -448,6 +448,46 @@ static NSString *_pathForTemporaryDirectory = nil;
 }
 
 
++(UIImage *)readFileAtPathAsImage:(NSString *)path
+{
+    return [self readFileAtPathAsImage:path error:nil];
+}
+
+
++(UIImage *)readFileAtPathAsImage:(NSString *)path error:(NSError **)error
+{
+    NSData *data = [self readFileAtPathAsData:path error:error];
+    
+    if(error == nil)
+    {
+        return [UIImage imageWithData:data];
+    }
+    
+    return nil;
+}
+
+
++(UIImageView *)readFileAtPathAsImageView:(NSString *)path
+{
+    return [self readFileAtPathAsImageView:path error:nil];
+}
+
+
++(UIImageView *)readFileAtPathAsImageView:(NSString *)path error:(NSError **)error
+{
+    UIImage *image = [self readFileAtPathAsImage:path error:error];
+    
+    if(error == nil)
+    {
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+        [imageView sizeToFit];
+        return imageView;
+    }
+    
+    return nil;
+}
+
+
 +(NSDictionary *)readFileAtPathAsJSON:(NSString *)path
 {
     return [self readFileAtPathAsJSON:path error:nil];
@@ -457,11 +497,15 @@ static NSString *_pathForTemporaryDirectory = nil;
 +(NSDictionary *)readFileAtPathAsJSON:(NSString *)path error:(NSError **)error
 {
     NSData *data = [self readFileAtPathAsData:path error:error];
-    NSJSONSerialization *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:error];
     
-    if([NSJSONSerialization isValidJSONObject:json])
+    if(error == nil)
     {
-        return (NSDictionary *)json;
+        NSJSONSerialization *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:error];
+        
+        if([NSJSONSerialization isValidJSONObject:json])
+        {
+            return (NSDictionary *)json;
+        }
     }
     
     return nil;
@@ -681,6 +725,14 @@ static NSString *_pathForTemporaryDirectory = nil;
     else if([content isKindOfClass:[NSString class]])
     {
         [[((NSString *)content) dataUsingEncoding:NSUTF8StringEncoding] writeToFile:absolutePath atomically:YES];
+    }
+    else if([content isKindOfClass:[UIImage class]])
+    {
+        [UIImagePNGRepresentation((UIImage *)content) writeToFile:absolutePath atomically:YES];
+    }
+    else if([content isKindOfClass:[UIImageView class]])
+    {
+        return [self writeFileAtPath:absolutePath content:((UIImageView *)content).image error:error];
     }
     else {
         [NSException raise:@"Invalid content type" format:@"content of type %@ is not handled.", NSStringFromClass([content class])];
