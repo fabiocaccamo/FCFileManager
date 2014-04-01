@@ -68,6 +68,8 @@
 
 +(NSArray *)readFileAtPathAsArray:(NSString *)path;
 
++(NSObject *)readFileAtPathAsCustomModel:(NSString *)path;
+
 +(NSData *)readFileAtPathAsData:(NSString *)path;
 +(NSData *)readFileAtPathAsData:(NSString *)path error:(NSError **)error;
 

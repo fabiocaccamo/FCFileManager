@@ -430,6 +430,12 @@ static NSString *_pathForTemporaryDirectory = nil;
 }
 
 
++(NSObject *)readFileAtPathAsCustomModel:(NSString *)path
+{
+    return [NSKeyedUnarchiver unarchiveObjectWithFile:[self absolutePath:path]];
+}
+
+
 +(NSData *)readFileAtPathAsData:(NSString *)path
 {
     return [self readFileAtPathAsData:path error:nil];
@@ -686,6 +692,11 @@ static NSString *_pathForTemporaryDirectory = nil;
 
 +(BOOL)writeFileAtPath:(NSString *)path content:(NSObject *)content error:(NSError **)error
 {
+    if(content == nil)
+    {
+        [NSException raise:@"Invalid content" format:@"content can't be nil."];
+    }
+    
     [self createFileAtPath:path withContent:nil error:error];
     
     NSString *absolutePath = [self absolutePath:path];
@@ -733,6 +744,10 @@ static NSString *_pathForTemporaryDirectory = nil;
     else if([content isKindOfClass:[UIImageView class]])
     {
         return [self writeFileAtPath:absolutePath content:((UIImageView *)content).image error:error];
+    }
+    else if([content conformsToProtocol:@protocol(NSCoding)])
+    {
+        [NSKeyedArchiver archiveRootObject:content toFile:absolutePath];
     }
     else {
         [NSException raise:@"Invalid content type" format:@"content of type %@ is not handled.", NSStringFromClass([content class])];
