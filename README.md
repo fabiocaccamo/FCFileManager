@@ -3,18 +3,18 @@ FCFileManager
 
 **iOS File Manager on top of NSFileManager for simplifying files management.** It provides many static methods for executing most common operations with few lines of code. It works by default in the Documents directory to allow use of relative paths, but it's possible to work easily on any other directory.
 
-#Requirements
+##Requirements
 - iOS >= 5.0
 - ARC enabled
 
-#Installation
+##Installation
 
-###CocoaPods:
+####CocoaPods:
 `pod 'FCFileManager'`
-###Manual install:
+####Manual install:
 Copy `FCFileManager.h` and `FCFileManager.m` to your project.
 
-#Features
+##Features
 - Build paths relative to absolute directories *(FCFileManager works by default in the Documents directory, so you must build absolute paths only if you need to work outside of the Documents directory)*
 - Copy files/directories
 - Create files/directories
@@ -24,16 +24,15 @@ Copy `FCFileManager.h` and `FCFileManager.m` to your project.
 - Get files/directories size
 - List files/directories
 - Move files/directories
-- Read files content in different formats
+- Read/Write files content in different formats *(arrays, custom models, data, dictionaries, images, json, strings, ... )*
 - Remove files/directories
 - Rename files/directories
-- Write files content
 - Directories are created on the fly
 - Error handling as using NSFileManager
 
 See [FCFileManager.h](https://github.com/fabiocaccamo/FCFileManager/blob/master/FCFileManager/FCFileManager.h) for all of the methods.
 
-#Usage examples
+##Usage examples
 
 **Build path:**
 ```objc
