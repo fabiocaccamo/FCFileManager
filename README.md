@@ -11,24 +11,23 @@ FCFileManager
 
 ####CocoaPods:
 `pod 'FCFileManager'`
+
 ####Manual install:
 Copy `FCFileManager.h` and `FCFileManager.m` to your project.
 
 ##Features
-- Build paths relative to absolute directories *(FCFileManager works by default in the Documents directory, so you must build absolute paths only if you need to work outside of the Documents directory)*
-- Copy files/directories
-- Create files/directories
-- Check if files/directory exists
-- Get files/directories attributes
-- Get files/directories creation date
-- Get files/directories size
-- List files/directories
-- Move files/directories
-- Read/Write files content in different formats *(arrays, custom models, data, dictionaries, images, json, strings, ... )*
-- Remove files/directories
-- Rename files/directories
+- **Build paths** relative to absolute directories *(FCFileManager works by default in the Documents directory, so you must build absolute paths only if you need to work outside of the Documents directory)*
+- **Copy** files/directories
+- **Create** files/directories
+- **Check if** files/directory **exists**
+- **Get** files/directories **attributes** *(creation date, size, ...)*
+- **List** files/directories
+- **Move** files/directories
+- **Read/Write** files content in different formats *(arrays, custom models, data, dictionaries, images, json, strings, ... )*
+- **Remove** files/directories
+- **Rename** files/directories
 - Directories are created on the fly
-- Error handling as using NSFileManager
+- **Error handling** as using NSFileManager
 
 See [FCFileManager.h](https://github.com/fabiocaccamo/FCFileManager/blob/master/FCFileManager/FCFileManager.h) for all of the methods.
 
