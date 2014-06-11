@@ -47,7 +47,7 @@ pathForApplicationSupportDirectory;
 pathForCachesDirectory;
 pathForDocumentsDirectory;
 pathForMainBundleDirectory;
-pathForPlistNamed:(NSString *)name; //look for {{ name }}.plist in the main bundle directory (extension insensitive)
+pathForPlistNamed:(NSString *)name; //look for {{ name }}.plist in the main bundle directory
 pathForTemporaryDirectory;
 */
 ```
