@@ -60,6 +60,8 @@
 +(NSString *)pathForMainBundleDirectory;
 +(NSString *)pathForMainBundleDirectoryWithPath:(NSString *)path;
 
++(NSString *)pathForPlistNamed:(NSString *)name;
+
 +(NSString *)pathForTemporaryDirectory;
 +(NSString *)pathForTemporaryDirectoryWithPath:(NSString *)path;
 

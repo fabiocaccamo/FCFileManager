@@ -396,6 +396,20 @@ static NSString *_pathForTemporaryDirectory = nil;
 }
 
 
++(NSString *)pathForPlistNamed:(NSString *)name
+{
+    NSString *nameExtension = [name pathExtension];
+    NSString *plistExtension = @"plist";
+    
+    if([nameExtension isEqualToString:@""])
+    {
+        name = [name stringByAppendingPathExtension:plistExtension];
+    }
+    
+    return [self pathForMainBundleDirectoryWithPath:name];
+}
+
+
 +(NSString *)pathForTemporaryDirectory
 {
     if(!_pathForTemporaryDirectory){
