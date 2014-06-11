@@ -41,7 +41,8 @@ NSString *testPath = @"test.txt";
 NSString *testPathTemp = [FCFileManager pathForTemporaryDirectoryWithPath:testPath];
 
 /*
-//All shortcuts suppported
+All shortcuts suppported:
+
 pathForApplicationSupportDirectory;
 pathForCachesDirectory;
 pathForDocumentsDirectory;
