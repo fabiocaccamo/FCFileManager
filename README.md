@@ -39,6 +39,16 @@ See [FCFileManager.h](https://github.com/fabiocaccamo/FCFileManager/blob/master/
 NSString *testPath = @"test.txt";
 //my file path relative to the temporary directory path
 NSString *testPathTemp = [FCFileManager pathForTemporaryDirectoryWithPath:testPath];
+
+/*
+//All shortcuts suppported
+pathForApplicationSupportDirectory;
+pathForCachesDirectory;
+pathForDocumentsDirectory;
+pathForMainBundleDirectory;
+pathForPlistNamed:(NSString *)name; //look for {{ name }}.plist in the main bundle directory (extension insensitive)
+pathForTemporaryDirectory;
+*/
 ```
 
 **Copy file:**
