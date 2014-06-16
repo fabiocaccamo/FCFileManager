@@ -179,6 +179,18 @@ static NSString *_pathForTemporaryDirectory = nil;
 }
 
 
++(BOOL)emptyCachesDirectory
+{
+    return [self removeFilesInDirectoryAtPath:[self pathForCachesDirectory]];
+}
+
+
++(BOOL)emptyTemporaryDirectory
+{
+    return [self removeFilesInDirectoryAtPath:[self pathForTemporaryDirectory]];
+}
+
+
 +(BOOL)existsItemAtPath:(NSString *)path
 {
     return [[NSFileManager defaultManager] fileExistsAtPath:[self absolutePath:path]];

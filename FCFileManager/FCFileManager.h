@@ -27,6 +27,9 @@
 +(NSDate *)creationDateOfItemAtPath:(NSString *)path;
 +(NSDate *)creationDateOfItemAtPath:(NSString *)path error:(NSError **)error;
 
++(BOOL)emptyCachesDirectory;
++(BOOL)emptyTemporaryDirectory;
+
 +(BOOL)existsItemAtPath:(NSString *)path;
 
 +(BOOL)isDirectoryItemAtPath:(NSString *)path;
