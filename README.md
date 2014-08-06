@@ -65,6 +65,12 @@ NSString *testPath = [FCFileManager pathForApplicationSupportDirectoryWithPath:@
 [FCFileManager createFileAtPath:@"test.txt" withContent:@"File management has never been so easy!!!"];
 ```
 
+**Create directories:**
+```objc
+//create directories tree for the given path (in this case in the Documents directory)
+[FCFileManager createDirectoriesForPath:@"/a/b/c/d/"];
+```
+
 **Check if file exists:**
 ```objc
 //check if file exist and returns YES or NO
