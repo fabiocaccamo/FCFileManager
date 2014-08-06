@@ -18,7 +18,11 @@
 +(BOOL)copyItemAtPath:(NSString *)path toPath:(NSString *)path;
 +(BOOL)copyItemAtPath:(NSString *)path toPath:(NSString *)path error:(NSError **)error;
 
++(BOOL)createDirectoriesForFileAtPath:(NSString *)path;
 +(BOOL)createDirectoriesForFileAtPath:(NSString *)path error:(NSError **)error;
+
++(BOOL)createDirectoriesForPath:(NSString *)path;
++(BOOL)createDirectoriesForPath:(NSString *)path error:(NSError **)error;
 
 +(BOOL)createFileAtPath:(NSString *)path;
 +(BOOL)createFileAtPath:(NSString *)path error:(NSError **)error;

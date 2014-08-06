@@ -116,6 +116,12 @@ static NSString *_pathForTemporaryDirectory = nil;
 }
 
 
++(BOOL)createDirectoriesForFileAtPath:(NSString *)path
+{
+    return [self createDirectoriesForFileAtPath:path error:nil];
+}
+
+
 +(BOOL)createDirectoriesForFileAtPath:(NSString *)path error:(NSError **)error
 {
     NSString *pathLastChar = [path substringFromIndex:(path.length - 1)];
@@ -127,7 +133,19 @@ static NSString *_pathForTemporaryDirectory = nil;
         return NO;
     }
     
-    return [[NSFileManager defaultManager] createDirectoryAtPath:[[self absolutePath:path] stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:error];
+    return [self createDirectoriesForPath:[[self absolutePath:path] stringByDeletingLastPathComponent] error:error];
+}
+
+
++(BOOL)createDirectoriesForPath:(NSString *)path
+{
+    return [self createDirectoriesForPath:path error:nil];
+}
+
+
++(BOOL)createDirectoriesForPath:(NSString *)path error:(NSError **)error
+{
+    return [[NSFileManager defaultManager] createDirectoryAtPath:[self absolutePath:path] withIntermediateDirectories:YES attributes:nil error:error];
 }
 
 
