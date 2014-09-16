@@ -21,7 +21,8 @@ static NSString *_pathForTemporaryDirectory = nil;
 
 +(NSMutableArray *)absoluteDirectories
 {
-    if(!_absoluteDirectories){
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
         _absoluteDirectories = [NSMutableArray arrayWithObjects:
                                 [self pathForApplicationSupportDirectory],
                                 [self pathForCachesDirectory],
@@ -31,14 +32,10 @@ static NSString *_pathForTemporaryDirectory = nil;
                                 nil];
         
         [_absoluteDirectories sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            
             return (((NSString *)obj1).length > ((NSString *)obj2).length) ? 0 : 1;
-            
         }];
-        
-        //directories ordered by -length because a directory could be a subpath of another one...
-    }
-    
+         //directories ordered by -length because a directory could be a subpath of another one...
+    });
     return _absoluteDirectories;
 }
 
