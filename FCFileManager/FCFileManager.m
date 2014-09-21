@@ -10,19 +10,14 @@
 @implementation FCFileManager
 
 
-static NSMutableArray *_absoluteDirectories = nil;
-
-static NSString *_pathForApplicationSupportDirectory = nil;
-static NSString *_pathForCachesDirectory = nil;
-static NSString *_pathForDocumentsDirectory = nil;
-static NSString *_pathForMainBundleDirectory = nil;
-static NSString *_pathForTemporaryDirectory = nil;
-
-
 +(NSMutableArray *)absoluteDirectories
 {
-    if(!_absoluteDirectories){
-        _absoluteDirectories = [NSMutableArray arrayWithObjects:
+    static NSMutableArray *directories = nil;
+    static dispatch_once_t token;
+    
+    dispatch_once(&token, ^{
+        
+        directories = [NSMutableArray arrayWithObjects:
                                 [self pathForApplicationSupportDirectory],
                                 [self pathForCachesDirectory],
                                 [self pathForDocumentsDirectory],
@@ -30,16 +25,14 @@ static NSString *_pathForTemporaryDirectory = nil;
                                 [self pathForTemporaryDirectory],
                                 nil];
         
-        [_absoluteDirectories sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        [directories sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
             
             return (((NSString *)obj1).length > ((NSString *)obj2).length) ? 0 : 1;
             
         }];
-        
-        //directories ordered by -length because a directory could be a subpath of another one...
-    }
+    });
     
-    return _absoluteDirectories;
+    return directories;
 }
 
 
@@ -355,14 +348,17 @@ static NSString *_pathForTemporaryDirectory = nil;
 
 +(NSString *)pathForApplicationSupportDirectory
 {
-    if(!_pathForApplicationSupportDirectory)
-    {
+    static NSString *path = nil;
+    static dispatch_once_t token;
+    
+    dispatch_once(&token, ^{
+        
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
         
-        _pathForApplicationSupportDirectory = [paths lastObject];
-    }
+        path = [paths lastObject];
+    });
     
-    return _pathForApplicationSupportDirectory;
+    return path;
 }
 
 
@@ -374,14 +370,17 @@ static NSString *_pathForTemporaryDirectory = nil;
 
 +(NSString *)pathForCachesDirectory
 {
-    if(!_pathForCachesDirectory)
-    {
+    static NSString *path = nil;
+    static dispatch_once_t token;
+    
+    dispatch_once(&token, ^{
+        
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
         
-        _pathForCachesDirectory = [paths lastObject];
-    }
+        path = [paths lastObject];
+    });
     
-    return _pathForCachesDirectory;
+    return path;
 }
 
 
@@ -393,14 +392,17 @@ static NSString *_pathForTemporaryDirectory = nil;
 
 +(NSString *)pathForDocumentsDirectory
 {
-    if(!_pathForDocumentsDirectory)
-    {
+    static NSString *path = nil;
+    static dispatch_once_t token;
+    
+    dispatch_once(&token, ^{
+        
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         
-        _pathForDocumentsDirectory = [paths lastObject];
-    }
+        path = [paths lastObject];
+    });
     
-    return _pathForDocumentsDirectory;
+    return path;
 }
 
 
@@ -412,11 +414,7 @@ static NSString *_pathForTemporaryDirectory = nil;
 
 +(NSString *)pathForMainBundleDirectory
 {
-    if(!_pathForMainBundleDirectory){
-        _pathForMainBundleDirectory = [NSBundle mainBundle].resourcePath;
-    }
-    
-    return _pathForMainBundleDirectory;
+    return [NSBundle mainBundle].resourcePath;
 }
 
 
@@ -442,11 +440,15 @@ static NSString *_pathForTemporaryDirectory = nil;
 
 +(NSString *)pathForTemporaryDirectory
 {
-    if(!_pathForTemporaryDirectory){
-        _pathForTemporaryDirectory = NSTemporaryDirectory();
-    }
+    static NSString *path = nil;
+    static dispatch_once_t token;
     
-    return _pathForTemporaryDirectory;
+    dispatch_once(&token, ^{
+        
+        path = NSTemporaryDirectory();
+    });
+    
+    return path;
 }
 
 
