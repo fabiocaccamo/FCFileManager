@@ -38,7 +38,9 @@
 
 +(NSString *)absoluteDirectoryForPath:(NSString *)path
 {
-    if(!path || [path isEqualToString:@""] || [path isEqualToString:@"/"])
+    [self assertPath:path];
+    
+    if([path isEqualToString:@"/"])
     {
         return nil;
     }
@@ -61,6 +63,8 @@
 
 +(NSString *)absolutePath:(NSString *)path
 {
+    [self assertPath:path];
+    
     NSString *defaultDirectory = [self absoluteDirectoryForPath:path];
     
     if(defaultDirectory != nil)
@@ -70,6 +74,13 @@
     else {
         return [self pathForDocumentsDirectoryWithPath:path];
     }
+}
+
+
++(void)assertPath:(NSString *)path
+{
+    NSAssert(path != nil, @"Invalid path. Path cannot be nil.");
+    NSAssert(![path isEqualToString:@""], @"Invalid path. Path cannot be empty string.");
 }
 
 
