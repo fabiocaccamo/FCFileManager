@@ -401,6 +401,28 @@
 }
 
 
++(NSString *)pathForLibraryDirectory
+{
+    static NSString *path = nil;
+    static dispatch_once_t token;
+    
+    dispatch_once(&token, ^{
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+        
+        path = [paths lastObject];
+    });
+    
+    return path;
+}
+
+
++(NSString *)pathForLibraryDirectoryWithPath:(NSString *)path
+{
+    return [[FCFileManager pathForLibraryDirectory] stringByAppendingPathComponent:path];
+}
+
+
 +(NSString *)pathForDocumentsDirectory
 {
     static NSString *path = nil;
