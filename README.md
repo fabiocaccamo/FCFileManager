@@ -46,6 +46,7 @@ All shortcuts suppported:
 pathForApplicationSupportDirectory;
 pathForCachesDirectory;
 pathForDocumentsDirectory;
+pathForLibraryDirectory;
 pathForMainBundleDirectory;
 pathForPlistNamed:(NSString *)name; //look for {{ name }}.plist in the main bundle directory
 pathForTemporaryDirectory;
