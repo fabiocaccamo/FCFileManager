@@ -21,6 +21,7 @@
                                 [self pathForApplicationSupportDirectory],
                                 [self pathForCachesDirectory],
                                 [self pathForDocumentsDirectory],
+                                [self pathForLibraryDirectory],
                                 [self pathForMainBundleDirectory],
                                 [self pathForTemporaryDirectory],
                                 nil];
@@ -420,6 +421,28 @@
 +(NSString *)pathForDocumentsDirectoryWithPath:(NSString *)path
 {
     return [[FCFileManager pathForDocumentsDirectory] stringByAppendingPathComponent:path];
+}
+
+
++(NSString *)pathForLibraryDirectory
+{
+    static NSString *path = nil;
+    static dispatch_once_t token;
+    
+    dispatch_once(&token, ^{
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+        
+        path = [paths lastObject];
+    });
+    
+    return path;
+}
+
+
++(NSString *)pathForLibraryDirectoryWithPath:(NSString *)path
+{
+    return [[FCFileManager pathForLibraryDirectory] stringByAppendingPathComponent:path];
 }
 
 

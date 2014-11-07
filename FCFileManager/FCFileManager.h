@@ -66,6 +66,9 @@
 +(NSString *)pathForDocumentsDirectory;
 +(NSString *)pathForDocumentsDirectoryWithPath:(NSString *)path;
 
++(NSString *)pathForLibraryDirectory;
++(NSString *)pathForLibraryDirectoryWithPath:(NSString *)path;
+
 +(NSString *)pathForMainBundleDirectory;
 +(NSString *)pathForMainBundleDirectoryWithPath:(NSString *)path;
 
