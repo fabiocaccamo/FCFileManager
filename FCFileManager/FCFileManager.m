@@ -574,13 +574,13 @@
 }
 
 
-+(NSDictionary *)readFileAtPathAsJSON:(NSString *)path
++(NSJSONSerialization *)readFileAtPathAsJSON:(NSString *)path
 {
     return [self readFileAtPathAsJSON:path error:nil];
 }
 
 
-+(NSDictionary *)readFileAtPathAsJSON:(NSString *)path error:(NSError **)error
++(NSJSONSerialization *)readFileAtPathAsJSON:(NSString *)path error:(NSError **)error
 {
     NSData *data = [self readFileAtPathAsData:path error:error];
     
@@ -590,7 +590,7 @@
         
         if([NSJSONSerialization isValidJSONObject:json])
         {
-            return (NSDictionary *)json;
+            return json;
         }
     }
     
