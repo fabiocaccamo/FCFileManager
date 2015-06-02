@@ -66,6 +66,11 @@
 {
     [self assertPath:path];
     
+    BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:path];
+    // If path is already absolute, just return it.
+    if(exists)
+        return path;
+    
     NSString *defaultDirectory = [self absoluteDirectoryForPath:path];
     
     if(defaultDirectory != nil)
