@@ -127,8 +127,8 @@
 +(BOOL)renameItemAtPath:(NSString *)path withName:(NSString *)name;
 +(BOOL)renameItemAtPath:(NSString *)path withName:(NSString *)name error:(NSError **)error;
 
-+(NSNumber *)sizeOfItemAtPath:(NSString *)path;
-+(NSNumber *)sizeOfItemAtPath:(NSString *)path error:(NSError **)error;
++(NSString *)sizeOfItemAtPath:(NSString *)path;
++(NSString *)sizeOfItemAtPath:(NSString *)path error:(NSError **)error;
 
 +(NSURL *)urlForItemAtPath:(NSString *)path;
 
