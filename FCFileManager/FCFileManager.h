@@ -135,8 +135,16 @@
 +(BOOL)renameItemAtPath:(NSString *)path withName:(NSString *)name;
 +(BOOL)renameItemAtPath:(NSString *)path withName:(NSString *)name error:(NSError **)error;
 
+
++(NSNumber *)sizeOfDirectoryAtPath:(NSString *)path;
++(NSNumber *)sizeOfDirectoryAtPath:(NSString *)path error:(NSError **)error;
+
++(NSNumber *)sizeOfFileAtPath:(NSString *)path;
++(NSNumber *)sizeOfFileAtPath:(NSString *)path error:(NSError **)error;
+
 +(NSNumber *)sizeOfItemAtPath:(NSString *)path;
 +(NSNumber *)sizeOfItemAtPath:(NSString *)path error:(NSError **)error;
+
 
 +(NSURL *)urlForItemAtPath:(NSString *)path;
 

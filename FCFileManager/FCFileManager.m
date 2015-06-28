@@ -789,6 +789,69 @@
 }
 
 
++(NSNumber *)sizeOfDirectoryAtPath:(NSString *)path
+{
+    return [self sizeOfDirectoryAtPath:path error:nil];
+}
+
+
++(NSNumber *)sizeOfDirectoryAtPath:(NSString *)path error:(NSError **)error
+{
+    if([self isDirectoryItemAtPath:path error:error])
+    {
+        if(error == nil)
+        {
+            NSNumber *size = [self sizeOfItemAtPath:path error:error];
+            double sizeValue = [size doubleValue];
+            
+            if(error == nil)
+            {
+                NSArray *subpaths = [self listItemsInDirectoryAtPath:path deep:YES];
+                NSUInteger subpathsCount = [subpaths count];
+                
+                for(NSUInteger i = 0; i < subpathsCount; i++)
+                {
+                    NSString *subpath = [subpaths objectAtIndex:i];
+                    NSNumber *subpathSize = [self sizeOfItemAtPath:subpath error:error];
+                    
+                    if(error == nil)
+                    {
+                        sizeValue += [subpathSize doubleValue];
+                    }
+                    else {
+                        return nil;
+                    }
+                }
+                
+                return [NSNumber numberWithDouble:sizeValue];
+            }
+        }
+    }
+    
+    return nil;
+}
+
+
++(NSNumber *)sizeOfFileAtPath:(NSString *)path
+{
+    return [self sizeOfFileAtPath:path error:nil];
+}
+
+
++(NSNumber *)sizeOfFileAtPath:(NSString *)path error:(NSError **)error
+{
+    if([self isFileItemAtPath:path error:error])
+    {
+        if(error == nil)
+        {
+            return [self sizeOfItemAtPath:path error:error];
+        }
+    }
+    
+    return nil;
+}
+
+
 +(NSNumber *)sizeOfItemAtPath:(NSString *)path
 {
     return [self sizeOfItemAtPath:path error:nil];
