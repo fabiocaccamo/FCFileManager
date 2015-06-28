@@ -789,6 +789,85 @@
 }
 
 
++(NSString *)sizeFormatted:(NSNumber *)size
+{
+    //TODO if OS X 10.8 or iOS 6
+    //return [NSByteCountFormatter stringFromByteCount:[size intValue] countStyle:NSByteCountFormatterCountStyleFile];
+    
+    double convertedValue = [size doubleValue];
+    int multiplyFactor = 0;
+    
+    NSArray *tokens = @[@"bytes", @"KB", @"MB", @"GB", @"TB"];
+    
+    while(convertedValue > 1024){
+        convertedValue /= 1024;
+        
+        multiplyFactor++;
+    }
+    
+    NSString *sizeFormat = ((multiplyFactor > 1) ? @"%4.2f %@" : @"%4.0f %@");
+    
+    return [NSString stringWithFormat:sizeFormat, convertedValue, tokens[multiplyFactor]];
+}
+
+
++(NSString *)sizeFormattedOfDirectoryAtPath:(NSString *)path
+{
+    return [self sizeFormattedOfDirectoryAtPath:path error:nil];
+}
+
+
++(NSString *)sizeFormattedOfDirectoryAtPath:(NSString *)path error:(NSError **)error
+{
+    NSNumber *size = [self sizeOfDirectoryAtPath:path error:error];
+    
+    if(size != nil && error == nil)
+    {
+        return [self sizeFormatted:size];
+    }
+    
+    return nil;
+}
+
+
++(NSString *)sizeFormattedOfFileAtPath:(NSString *)path
+{
+    return [self sizeFormattedOfFileAtPath:path error:nil];
+}
+
+
++(NSString *)sizeFormattedOfFileAtPath:(NSString *)path error:(NSError **)error
+{
+    NSNumber *size = [self sizeOfFileAtPath:path error:error];
+    
+    if(size != nil && error == nil)
+    {
+        return [self sizeFormatted:size];
+    }
+    
+    return nil;
+}
+
+
++(NSString *)sizeFormattedOfItemAtPath:(NSString *)path
+{
+    return [self sizeFormattedOfItemAtPath:path error:nil];
+}
+
+
++(NSString *)sizeFormattedOfItemAtPath:(NSString *)path error:(NSError **)error
+{
+    NSNumber *size = [self sizeOfItemAtPath:path error:error];
+    
+    if(size != nil && error == nil)
+    {
+        return [self sizeFormatted:size];
+    }
+    
+    return nil;
+}
+
+
 +(NSNumber *)sizeOfDirectoryAtPath:(NSString *)path
 {
     return [self sizeOfDirectoryAtPath:path error:nil];
