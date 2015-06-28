@@ -121,9 +121,8 @@ NSNumber *directorySize = [FCFileManager sizeOfDirectoryAtPath:@"/a/"];
 
 **Get file/directory size formatted:**
 ```objc
-//get the file size in bytes
-NSString *fileSizeFormatted = [FCFileManager sizeFormattedOfFileAtPath:@"test.txt"];
 //returns a human-readable file size formatted with the necessary suffix: bytes, KB, MB, GB, TB
+NSString *fileSizeFormatted = [FCFileManager sizeFormattedOfFileAtPath:@"test.txt"];
 ```
 
 Enjoy :)
