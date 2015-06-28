@@ -49,10 +49,18 @@
 +(BOOL)isReadableItemAtPath:(NSString *)path;
 +(BOOL)isWritableItemAtPath:(NSString *)path;
 
++(NSArray *)listDirectoriesInDirectoryAtPath:(NSString *)path;
++(NSArray *)listDirectoriesInDirectoryAtPath:(NSString *)path deep:(BOOL)deep;
+
 +(NSArray *)listFilesInDirectoryAtPath:(NSString *)path;
++(NSArray *)listFilesInDirectoryAtPath:(NSString *)path deep:(BOOL)deep;
 +(NSArray *)listFilesInDirectoryAtPath:(NSString *)path withExtension:(NSString *)extension;
++(NSArray *)listFilesInDirectoryAtPath:(NSString *)path withExtension:(NSString *)extension deep:(BOOL)deep;
 +(NSArray *)listFilesInDirectoryAtPath:(NSString *)path withPrefix:(NSString *)prefix;
++(NSArray *)listFilesInDirectoryAtPath:(NSString *)path withPrefix:(NSString *)prefix deep:(BOOL)deep;
 +(NSArray *)listFilesInDirectoryAtPath:(NSString *)path withSuffix:(NSString *)suffix;
++(NSArray *)listFilesInDirectoryAtPath:(NSString *)path withSuffix:(NSString *)suffix deep:(BOOL)deep;
+
 +(NSArray *)listItemsInDirectoryAtPath:(NSString *)path deep:(BOOL)deep;
 
 +(BOOL)moveItemAtPath:(NSString *)path toPath:(NSString *)toPath;

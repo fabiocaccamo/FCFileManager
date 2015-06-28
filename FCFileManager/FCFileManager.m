@@ -274,7 +274,32 @@
 }
 
 
++(NSArray *)listDirectoriesInDirectoryAtPath:(NSString *)path
+{
+    return [self listDirectoriesInDirectoryAtPath:path deep:NO];
+}
+
+
++(NSArray *)listDirectoriesInDirectoryAtPath:(NSString *)path deep:(BOOL)deep
+{
+    NSArray *subpaths = [self listItemsInDirectoryAtPath:path deep:deep];
+    
+    return [subpaths filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        
+        NSString *subpath = (NSString *)evaluatedObject;
+        
+        return [self isDirectoryItemAtPath:subpath];
+    }]];
+}
+
+
 +(NSArray *)listFilesInDirectoryAtPath:(NSString *)path
+{
+    return [self listDirectoriesInDirectoryAtPath:path deep:NO];
+}
+
+
++(NSArray *)listFilesInDirectoryAtPath:(NSString *)path deep:(BOOL)deep
 {
     NSArray *subpaths = [self listItemsInDirectoryAtPath:path deep:NO];
     
@@ -288,6 +313,12 @@
 
 
 +(NSArray *)listFilesInDirectoryAtPath:(NSString *)path withExtension:(NSString *)extension
+{
+    return [self listFilesInDirectoryAtPath:path withExtension:extension deep:NO];
+}
+
+
++(NSArray *)listFilesInDirectoryAtPath:(NSString *)path withExtension:(NSString *)extension deep:(BOOL)deep
 {
     NSArray *subpaths = [self listFilesInDirectoryAtPath:path];
     
@@ -304,6 +335,12 @@
 
 +(NSArray *)listFilesInDirectoryAtPath:(NSString *)path withPrefix:(NSString *)prefix
 {
+    return [self listFilesInDirectoryAtPath:path withPrefix:prefix deep:NO];
+}
+
+
++(NSArray *)listFilesInDirectoryAtPath:(NSString *)path withPrefix:(NSString *)prefix deep:(BOOL)deep
+{
     NSArray *subpaths = [self listFilesInDirectoryAtPath:path];
     
     return [subpaths filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
@@ -316,6 +353,12 @@
 
 
 +(NSArray *)listFilesInDirectoryAtPath:(NSString *)path withSuffix:(NSString *)suffix
+{
+    return [self listFilesInDirectoryAtPath:path withSuffix:suffix deep:NO];
+}
+
+
++(NSArray *)listFilesInDirectoryAtPath:(NSString *)path withSuffix:(NSString *)suffix deep:(BOOL)deep
 {
     NSArray *subpaths = [self listFilesInDirectoryAtPath:path];
     
