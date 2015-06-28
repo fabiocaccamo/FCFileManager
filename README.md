@@ -110,4 +110,20 @@ NSArray *testContent = [NSArray arrayWithObjects:@"t", @"e", @"s", @"t", nil];
 [FCFileManager writeFileAtPath:@"test.txt" content:testContent];
 ```
 
+**Get file/directory size:**
+```objc
+//get the file size in bytes
+NSNumber *fileSize = [FCFileManager sizeOfFileAtPath:@"test.txt"];
+
+//get the directory size in bytes (including all subdirectories and files inside it)
+NSNumber *directorySize = [FCFileManager sizeOfDirectoryAtPath:@"/a/"];
+```
+
+**Get file/directory size formatted:**
+```objc
+//get the file size in bytes
+NSString *fileSizeFormatted = [FCFileManager sizeFormattedOfFileAtPath:@"test.txt"];
+//returns a human-readable file size formatted with the necessary suffix: bytes, KB, MB, GB, TB
+```
+
 Enjoy :)
