@@ -295,7 +295,7 @@
 
 +(NSArray *)listFilesInDirectoryAtPath:(NSString *)path
 {
-    return [self listDirectoriesInDirectoryAtPath:path deep:NO];
+    return [self listFilesInDirectoryAtPath:path deep:NO];
 }
 
 
