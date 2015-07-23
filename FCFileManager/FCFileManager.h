@@ -41,10 +41,13 @@
 
 +(BOOL)isDirectoryItemAtPath:(NSString *)path;
 +(BOOL)isDirectoryItemAtPath:(NSString *)path error:(NSError **)error;
+
 +(BOOL)isEmptyItemAtPath:(NSString *)path;
 +(BOOL)isEmptyItemAtPath:(NSString *)path error:(NSError **)error;
+
 +(BOOL)isFileItemAtPath:(NSString *)path;
 +(BOOL)isFileItemAtPath:(NSString *)path error:(NSError **)error;
+
 +(BOOL)isExecutableItemAtPath:(NSString *)path;
 +(BOOL)isReadableItemAtPath:(NSString *)path;
 +(BOOL)isWritableItemAtPath:(NSString *)path;
@@ -54,10 +57,13 @@
 
 +(NSArray *)listFilesInDirectoryAtPath:(NSString *)path;
 +(NSArray *)listFilesInDirectoryAtPath:(NSString *)path deep:(BOOL)deep;
+
 +(NSArray *)listFilesInDirectoryAtPath:(NSString *)path withExtension:(NSString *)extension;
 +(NSArray *)listFilesInDirectoryAtPath:(NSString *)path withExtension:(NSString *)extension deep:(BOOL)deep;
+
 +(NSArray *)listFilesInDirectoryAtPath:(NSString *)path withPrefix:(NSString *)prefix;
 +(NSArray *)listFilesInDirectoryAtPath:(NSString *)path withPrefix:(NSString *)prefix deep:(BOOL)deep;
+
 +(NSArray *)listFilesInDirectoryAtPath:(NSString *)path withSuffix:(NSString *)suffix;
 +(NSArray *)listFilesInDirectoryAtPath:(NSString *)path withSuffix:(NSString *)suffix deep:(BOOL)deep;
 
@@ -119,10 +125,13 @@
 
 +(BOOL)removeFilesInDirectoryAtPath:(NSString *)path;
 +(BOOL)removeFilesInDirectoryAtPath:(NSString *)path error:(NSError **)error;
+
 +(BOOL)removeFilesInDirectoryAtPath:(NSString *)path withExtension:(NSString *)extension;
 +(BOOL)removeFilesInDirectoryAtPath:(NSString *)path withExtension:(NSString *)extension error:(NSError **)error;
+
 +(BOOL)removeFilesInDirectoryAtPath:(NSString *)path withPrefix:(NSString *)prefix;
 +(BOOL)removeFilesInDirectoryAtPath:(NSString *)path withPrefix:(NSString *)prefix error:(NSError **)error;
+
 +(BOOL)removeFilesInDirectoryAtPath:(NSString *)path withSuffix:(NSString *)suffix;
 +(BOOL)removeFilesInDirectoryAtPath:(NSString *)path withSuffix:(NSString *)suffix error:(NSError **)error;
 
@@ -134,7 +143,6 @@
 
 +(BOOL)renameItemAtPath:(NSString *)path withName:(NSString *)name;
 +(BOOL)renameItemAtPath:(NSString *)path withName:(NSString *)name error:(NSError **)error;
-
 
 +(NSString *)sizeFormatted:(NSNumber *)size;
 
@@ -155,7 +163,6 @@
 
 +(NSNumber *)sizeOfItemAtPath:(NSString *)path;
 +(NSNumber *)sizeOfItemAtPath:(NSString *)path error:(NSError **)error;
-
 
 +(NSURL *)urlForItemAtPath:(NSString *)path;
 
