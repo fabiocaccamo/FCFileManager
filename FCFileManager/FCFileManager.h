@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <ImageIO/ImageIO.h>
+#import <sys/xattr.h>
 #import <UIKit/UIKit.h>
 
 @interface FCFileManager : NSObject
@@ -173,6 +174,12 @@
 +(NSDictionary *)metadataOfImageAtPath:(NSString *)path;
 +(NSDictionary *)exifDataOfImageAtPath:(NSString *)path;
 +(NSDictionary *)tiffDataOfImageAtPath:(NSString *)path;
+
++(NSDictionary *)xattrOfItemAtPath:(NSString *)path;
++(NSString *)xattrOfItemAtPath:(NSString *)path getValueForKey:(NSString *)key;
++(BOOL)xattrOfItemAtPath:(NSString *)path hasValueForKey:(NSString *)key;
++(BOOL)xattrOfItemAtPath:(NSString *)path removeValueForKey:(NSString *)key;
++(BOOL)xattrOfItemAtPath:(NSString *)path setValue:(NSString *)value forKey:(NSString *)key;
 
 @end
 
