@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <ImageIO/ImageIO.h>
 #import <UIKit/UIKit.h>
 
 @interface FCFileManager : NSObject
@@ -168,6 +169,10 @@
 
 +(BOOL)writeFileAtPath:(NSString *)path content:(NSObject *)content;
 +(BOOL)writeFileAtPath:(NSString *)path content:(NSObject *)content error:(NSError **)error;
+
++(NSDictionary *)metadataOfImageAtPath:(NSString *)path;
++(NSDictionary *)exifDataOfImageAtPath:(NSString *)path;
++(NSDictionary *)tiffDataOfImageAtPath:(NSString *)path;
 
 @end
 
