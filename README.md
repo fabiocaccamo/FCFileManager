@@ -24,6 +24,8 @@ Copy `FCFileManager.h` and `FCFileManager.m` to your project.
 - **List** files/directories
 - **Move** files/directories
 - **Read/Write** files content in different formats *(arrays, custom models, data, dictionaries, images, json, strings, ... )*
+- **Read/Write xattr** *(Extended File Attributes)*
+- **Read** images metadata, **EXIF** data, **TIFF** data
 - **Remove** files/directories
 - **Rename** files/directories
 - Directories are created on the fly
@@ -88,6 +90,21 @@ BOOL testFileExists = [FCFileManager existsItemAtPath:@"test.txt"];
 ```objc
 //read file from path and returns its content (NSString in this case)
 NSString *test = [FCFileManager readFileAtPath:@"test.txt"];
+```
+
+**Read/Write xattr (Extended File Attributes):**
+```objc
+//returns the string-value stored for the specified key, if the key doesn't exist returns nil
+NSString *value = [FCFileManager xattrOfItemAtPath:@"test.txt" getValueForKey:"uploaded"];
+
+//set the specified string-value and returns a BOOL result of the operation
+BOOL success = [FCFileManager xattrOfItemAtPath:@"test.txt" setValue:@"1" forKey:@"uploaded"];
+```
+
+**Read image EXIF data:**
+```objc
+//read image file from path and returns its EXIF data
+NSDictionary *exifData = [FCFileManager exifDataOfImageAtPath:@"test.jpg"];
 ```
 
 **Remove file:**
