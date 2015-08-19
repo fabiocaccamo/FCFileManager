@@ -301,7 +301,7 @@
 
 +(NSArray *)listFilesInDirectoryAtPath:(NSString *)path deep:(BOOL)deep
 {
-    NSArray *subpaths = [self listItemsInDirectoryAtPath:path deep:NO];
+    NSArray *subpaths = [self listItemsInDirectoryAtPath:path deep:deep];
     
     return [subpaths filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
         
