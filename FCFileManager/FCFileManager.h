@@ -7,7 +7,6 @@
 
 #import <Foundation/Foundation.h>
 #import <ImageIO/ImageIO.h>
-#import <sys/xattr.h>
 #import <UIKit/UIKit.h>
 
 @interface FCFileManager : NSObject

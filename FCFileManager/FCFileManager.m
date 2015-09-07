@@ -6,6 +6,7 @@
 //
 
 #import "FCFileManager.h"
+#import <sys/xattr.h>
 
 @implementation FCFileManager
 
