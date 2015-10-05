@@ -177,14 +177,14 @@
 {
     if(![self existsItemAtPath:path] && [self createDirectoriesForFileAtPath:path error:error])
     {
-        [[NSFileManager defaultManager] createFileAtPath:[self absolutePath:path] contents:nil attributes:nil];
+        BOOL created = [[NSFileManager defaultManager] createFileAtPath:[self absolutePath:path] contents:nil attributes:nil];
         
         if(content != nil)
         {
             [self writeFileAtPath:path content:content error:error];
         }
         
-        return (error == nil);
+        return (created && [self isNotError:error]);
     }
     
     return NO;
@@ -260,6 +260,14 @@
 +(BOOL)isExecutableItemAtPath:(NSString *)path
 {
     return [[NSFileManager defaultManager] isExecutableFileAtPath:[self absolutePath:path]];
+}
+
+
++(BOOL)isNotError:(NSError **)error
+{
+    //the first check prevents EXC_BAD_ACCESS error in case methods are called passing nil to error argument
+    //the second check prevents that the methods returns always NO just because the error pointer exists (so the first condition returns YES)
+    return ((error == nil) || ((*error) == nil));
 }
 
 
@@ -588,7 +596,7 @@
 {
     NSData *data = [self readFileAtPathAsData:path error:error];
     
-    if(error == nil)
+    if([self isNotError:error])
     {
         return [UIImage imageWithData:data];
     }
@@ -607,7 +615,7 @@
 {
     UIImage *image = [self readFileAtPathAsImage:path error:error];
     
-    if(error == nil)
+    if([self isNotError:error])
     {
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
         [imageView sizeToFit];
@@ -628,7 +636,7 @@
 {
     NSData *data = [self readFileAtPathAsData:path error:error];
     
-    if(error == nil)
+    if([self isNotError:error])
     {
         NSJSONSerialization *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:error];
         
@@ -822,7 +830,7 @@
 {
     NSNumber *size = [self sizeOfDirectoryAtPath:path error:error];
     
-    if(size != nil && error == nil)
+    if(size != nil && [self isNotError:error])
     {
         return [self sizeFormatted:size];
     }
@@ -841,7 +849,7 @@
 {
     NSNumber *size = [self sizeOfFileAtPath:path error:error];
     
-    if(size != nil && error == nil)
+    if(size != nil && [self isNotError:error])
     {
         return [self sizeFormatted:size];
     }
@@ -860,7 +868,7 @@
 {
     NSNumber *size = [self sizeOfItemAtPath:path error:error];
     
-    if(size != nil && error == nil)
+    if(size != nil && [self isNotError:error])
     {
         return [self sizeFormatted:size];
     }
@@ -879,12 +887,12 @@
 {
     if([self isDirectoryItemAtPath:path error:error])
     {
-        if(error == nil)
+        if([self isNotError:error])
         {
             NSNumber *size = [self sizeOfItemAtPath:path error:error];
             double sizeValue = [size doubleValue];
             
-            if(error == nil)
+            if([self isNotError:error])
             {
                 NSArray *subpaths = [self listItemsInDirectoryAtPath:path deep:YES];
                 NSUInteger subpathsCount = [subpaths count];
@@ -894,7 +902,7 @@
                     NSString *subpath = [subpaths objectAtIndex:i];
                     NSNumber *subpathSize = [self sizeOfItemAtPath:subpath error:error];
                     
-                    if(error == nil)
+                    if([self isNotError:error])
                     {
                         sizeValue += [subpathSize doubleValue];
                     }
@@ -922,7 +930,7 @@
 {
     if([self isFileItemAtPath:path error:error])
     {
-        if(error == nil)
+        if([self isNotError:error])
         {
             return [self sizeOfItemAtPath:path error:error];
         }
