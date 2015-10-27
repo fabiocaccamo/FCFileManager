@@ -20,6 +20,9 @@
 +(BOOL)copyItemAtPath:(NSString *)path toPath:(NSString *)toPath;
 +(BOOL)copyItemAtPath:(NSString *)path toPath:(NSString *)toPath error:(NSError **)error;
 
++(BOOL)copyItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite;
++(BOOL)copyItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite error:(NSError **)error;
+
 +(BOOL)createDirectoriesForFileAtPath:(NSString *)path;
 +(BOOL)createDirectoriesForFileAtPath:(NSString *)path error:(NSError **)error;
 
@@ -29,8 +32,14 @@
 +(BOOL)createFileAtPath:(NSString *)path;
 +(BOOL)createFileAtPath:(NSString *)path error:(NSError **)error;
 
++(BOOL)createFileAtPath:(NSString *)path overwrite:(BOOL)overwrite;
++(BOOL)createFileAtPath:(NSString *)path overwrite:(BOOL)overwrite error:(NSError **)error;
+
 +(BOOL)createFileAtPath:(NSString *)path withContent:(NSObject *)content;
 +(BOOL)createFileAtPath:(NSString *)path withContent:(NSObject *)content error:(NSError **)error;
+
++(BOOL)createFileAtPath:(NSString *)path withContent:(NSObject *)content overwrite:(BOOL)overwrite;
++(BOOL)createFileAtPath:(NSString *)path withContent:(NSObject *)content overwrite:(BOOL)overwrite error:(NSError **)error;
 
 +(NSDate *)creationDateOfItemAtPath:(NSString *)path;
 +(NSDate *)creationDateOfItemAtPath:(NSString *)path error:(NSError **)error;
@@ -72,6 +81,9 @@
 
 +(BOOL)moveItemAtPath:(NSString *)path toPath:(NSString *)toPath;
 +(BOOL)moveItemAtPath:(NSString *)path toPath:(NSString *)toPath error:(NSError **)error;
+
++(BOOL)moveItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite;
++(BOOL)moveItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite error:(NSError **)error;
 
 +(NSString *)pathForApplicationSupportDirectory;
 +(NSString *)pathForApplicationSupportDirectoryWithPath:(NSString *)path;

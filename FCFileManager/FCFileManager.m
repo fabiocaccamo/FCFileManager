@@ -112,13 +112,39 @@
 
 +(BOOL)copyItemAtPath:(NSString *)path toPath:(NSString *)toPath
 {
-    return [self copyItemAtPath:path toPath:toPath error:nil];
+    return [self copyItemAtPath:path toPath:toPath overwrite:NO error:nil];
 }
 
 
 +(BOOL)copyItemAtPath:(NSString *)path toPath:(NSString *)toPath error:(NSError **)error
 {
-    return ([self createDirectoriesForFileAtPath:toPath error:error] && [[NSFileManager defaultManager] copyItemAtPath:[self absolutePath:path] toPath:[self absolutePath:toPath] error:error]);
+    return [self copyItemAtPath:path toPath:toPath overwrite:NO error:error];
+}
+
+
++(BOOL)copyItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite
+{
+    return [self copyItemAtPath:path toPath:toPath overwrite:overwrite error:nil];
+}
+
+
++(BOOL)copyItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite error:(NSError **)error
+{
+    if(![self existsItemAtPath:toPath] || (overwrite && [self removeItemAtPath:toPath error:error] && [self isNotError:error]))
+    {
+        if([self createDirectoriesForFileAtPath:toPath error:error])
+        {
+            BOOL copied = [[NSFileManager defaultManager] copyItemAtPath:[self absolutePath:path] toPath:[self absolutePath:toPath] error:error];
+            
+            return (copied && [self isNotError:error]);
+        }
+        else {
+            return NO;
+        }
+    }
+    else {
+        return NO;
+    }
 }
 
 
@@ -157,37 +183,68 @@
 
 +(BOOL)createFileAtPath:(NSString *)path
 {
-    return [self createFileAtPath:path withContent:nil error:nil];
+    return [self createFileAtPath:path withContent:nil overwrite:NO error:nil];
 }
 
 
 +(BOOL)createFileAtPath:(NSString *)path error:(NSError **)error
 {
-    return [self createFileAtPath:path withContent:nil error:error];
+    return [self createFileAtPath:path withContent:nil overwrite:NO error:error];
+}
+
+
++(BOOL)createFileAtPath:(NSString *)path overwrite:(BOOL)overwrite
+{
+    return [self createFileAtPath:path withContent:nil overwrite:overwrite error:nil];
+}
+
+
++(BOOL)createFileAtPath:(NSString *)path overwrite:(BOOL)overwrite error:(NSError **)error
+{
+    return [self createFileAtPath:path withContent:nil overwrite:overwrite error:error];
 }
 
 
 +(BOOL)createFileAtPath:(NSString *)path withContent:(NSObject *)content
 {
-    return [self createFileAtPath:path withContent:content error:nil];
+    return [self createFileAtPath:path withContent:content overwrite:NO error:nil];
 }
 
 
 +(BOOL)createFileAtPath:(NSString *)path withContent:(NSObject *)content error:(NSError **)error
 {
-    if(![self existsItemAtPath:path] && [self createDirectoriesForFileAtPath:path error:error])
+    return [self createFileAtPath:path withContent:content overwrite:NO error:error];
+}
+
+
++(BOOL)createFileAtPath:(NSString *)path withContent:(NSObject *)content overwrite:(BOOL)overwrite
+{
+    return [self createFileAtPath:path withContent:content overwrite:overwrite error:nil];
+}
+
+
++(BOOL)createFileAtPath:(NSString *)path withContent:(NSObject *)content overwrite:(BOOL)overwrite error:(NSError **)error
+{
+    if(![self existsItemAtPath:path] || (overwrite && [self removeItemAtPath:path error:error] && [self isNotError:error]))
     {
-        BOOL created = [[NSFileManager defaultManager] createFileAtPath:[self absolutePath:path] contents:nil attributes:nil];
-        
-        if(content != nil)
+        if([self createDirectoriesForFileAtPath:path error:error])
         {
-            [self writeFileAtPath:path content:content error:error];
+            BOOL created = [[NSFileManager defaultManager] createFileAtPath:[self absolutePath:path] contents:nil attributes:nil];
+            
+            if(content != nil)
+            {
+                [self writeFileAtPath:path content:content error:error];
+            }
+            
+            return (created && [self isNotError:error]);
         }
-        
-        return (created && [self isNotError:error]);
+        else {
+            return NO;
+        }
     }
-    
-    return NO;
+    else {
+        return NO;
+    }
 }
 
 
@@ -400,13 +457,31 @@
 
 +(BOOL)moveItemAtPath:(NSString *)path toPath:(NSString *)toPath
 {
-    return [self moveItemAtPath:path toPath:toPath error:nil];
+    return [self moveItemAtPath:path toPath:toPath overwrite:NO error:nil];
 }
 
 
 +(BOOL)moveItemAtPath:(NSString *)path toPath:(NSString *)toPath error:(NSError **)error
 {
-    return ([self createDirectoriesForFileAtPath:toPath error:error] && [[NSFileManager defaultManager] moveItemAtPath:[self absolutePath:path] toPath:[self absolutePath:toPath] error:error]);
+    return [self moveItemAtPath:path toPath:toPath overwrite:NO error:error];
+}
+
+
++(BOOL)moveItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite
+{
+    return [self moveItemAtPath:path toPath:toPath overwrite:overwrite error:nil];
+}
+
+
++(BOOL)moveItemAtPath:(NSString *)path toPath:(NSString *)toPath overwrite:(BOOL)overwrite error:(NSError **)error
+{
+    if(![self existsItemAtPath:toPath] || (overwrite && [self removeItemAtPath:toPath error:error] && [self isNotError:error]))
+    {
+        return ([self createDirectoriesForFileAtPath:toPath error:error] && [[NSFileManager defaultManager] moveItemAtPath:[self absolutePath:path] toPath:[self absolutePath:toPath] error:error]);
+    }
+    else {
+        return NO;
+    }
 }
 
 
@@ -971,7 +1046,7 @@
         [NSException raise:@"Invalid content" format:@"content can't be nil."];
     }
     
-    [self createFileAtPath:path withContent:nil error:error];
+    [self createFileAtPath:path withContent:nil overwrite:YES error:error];
     
     NSString *absolutePath = [self absolutePath:path];
     
