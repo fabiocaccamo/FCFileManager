@@ -17,8 +17,8 @@
 +(NSDictionary *)attributesOfItemAtPath:(NSString *)path;
 +(NSDictionary *)attributesOfItemAtPath:(NSString *)path error:(NSError **)error;
 
-+(BOOL)copyItemAtPath:(NSString *)path toPath:(NSString *)path;
-+(BOOL)copyItemAtPath:(NSString *)path toPath:(NSString *)path error:(NSError **)error;
++(BOOL)copyItemAtPath:(NSString *)path toPath:(NSString *)toPath;
++(BOOL)copyItemAtPath:(NSString *)path toPath:(NSString *)toPath error:(NSError **)error;
 
 +(BOOL)createDirectoriesForFileAtPath:(NSString *)path;
 +(BOOL)createDirectoriesForFileAtPath:(NSString *)path error:(NSError **)error;
