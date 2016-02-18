@@ -4,13 +4,25 @@ FCFileManager ![Pod version](http://img.shields.io/cocoapods/v/FCFileManager.svg
 **iOS File Manager on top of NSFileManager for simplifying files management.** It provides many static methods for executing most common operations with few lines of code. It works by default in the Documents directory to allow use of relative paths, but it's possible to work easily on any other directory.
 
 ##Requirements
-- iOS >= 5.0
+- iOS >= 5.0 ( iOS >= 8.0 with Carthage )
 - ARC enabled
 
 ##Installation
 
 ####CocoaPods:
 `pod 'FCFileManager'`
+
+####Carthage
+
+Add the following in your Cartfile:
+
+```
+github "fabiocaccamo/FCFileManager"
+```
+
+And run `carthage update`
+
+Up to date instructions in [Carthage's README](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application)
 
 ####Manual install:
 Copy `FCFileManager.h` and `FCFileManager.m` to your project.
@@ -169,4 +181,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-
