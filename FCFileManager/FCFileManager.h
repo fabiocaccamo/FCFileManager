@@ -9,6 +9,14 @@
 #import <ImageIO/ImageIO.h>
 #import <UIKit/UIKit.h>
 
+//! Project version number for FCFileManager.
+FOUNDATION_EXPORT double FCFileManagerVersionNumber;
+
+//! Project version string for FCFileManager.
+FOUNDATION_EXPORT const unsigned char FCFileManagerVersionString[];
+
+// In this header, you should import all the public headers of your framework using statements like #import <FCFileManager/PublicHeader.h>
+
 @interface FCFileManager : NSObject
 
 +(id)attributeOfItemAtPath:(NSString *)path forKey:(NSString *)key;
