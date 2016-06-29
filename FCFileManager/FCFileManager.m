@@ -260,6 +260,16 @@
 }
 
 
++(NSDate *)modificationDateOfItemAtPath:(NSString *)path
+{
+    return [self modificationDateOfItemAtPath:path error:nil];
+}
+
++(NSDate *)modificationDateOfItemAtPath:(NSString *)path error:(NSError **)error
+{
+    return (NSDate *)[self attributeOfItemAtPath:path forKey:NSFileModificationDate error:error];
+}
+
 +(BOOL)emptyCachesDirectory
 {
     return [self removeFilesInDirectoryAtPath:[self pathForCachesDirectory]];

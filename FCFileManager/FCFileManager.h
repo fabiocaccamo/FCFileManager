@@ -44,6 +44,9 @@
 +(NSDate *)creationDateOfItemAtPath:(NSString *)path;
 +(NSDate *)creationDateOfItemAtPath:(NSString *)path error:(NSError **)error;
 
++(NSDate *)modificationDateOfItemAtPath:(NSString *)path;
++(NSDate *)modificationDateOfItemAtPath:(NSString *)path error:(NSError **)error;
+
 +(BOOL)emptyCachesDirectory;
 +(BOOL)emptyTemporaryDirectory;
 
