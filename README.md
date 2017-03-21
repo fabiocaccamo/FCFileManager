@@ -3,19 +3,19 @@ FCFileManager ![Pod version](http://img.shields.io/cocoapods/v/FCFileManager.svg
 
 **iOS File Manager on top of NSFileManager for simplifying files management.** It provides many static methods for executing most common operations with few lines of code. It works by default in the Documents directory to allow use of relative paths, but it's possible to work easily on any other directory.
 
-##Requirements
+## Requirements
 - iOS >= 5.0
 - ARC enabled
 
-##Installation
+## Installation
 
-####CocoaPods:
+#### CocoaPods:
 `pod 'FCFileManager'`
 
-####Manual install:
+#### Manual install:
 Copy `FCFileManager.h` and `FCFileManager.m` to your project.
 
-##Features
+## Features
 - **Build paths** relative to absolute directories *(FCFileManager works by default in the Documents directory, so you must build absolute paths only if you need to work outside of the Documents directory)*
 - **Copy** files/directories
 - **Create** files/directories
@@ -33,7 +33,7 @@ Copy `FCFileManager.h` and `FCFileManager.m` to your project.
 
 See [FCFileManager.h](https://github.com/fabiocaccamo/FCFileManager/blob/master/FCFileManager/FCFileManager.h) for all of the methods.
 
-##Usage examples
+## Usage examples
 
 **Build path:**
 ```objc
@@ -142,10 +142,10 @@ NSNumber *directorySize = [FCFileManager sizeOfDirectoryAtPath:@"/a/"];
 NSString *fileSizeFormatted = [FCFileManager sizeFormattedOfFileAtPath:@"test.txt"];
 ```
 
-##Support development
+## Support development
 [![Donate](https://pledgie.com/campaigns/32215.png?skin_name=chrome "Click here to lend your support to: Fabio Caccamo - Open Source Projects and make a donation at pledgie.com !")](https://pledgie.com/campaigns/32215)
 
 [![Donate](https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_pp_142x27.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=fabio%2ecaccamo%40gmail%2ecom&lc=IT&item_name=Fabio%20Caccamo%20%2d%20Open%20Source%20Projects&item_number=FCFileManager&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
 
-##License
+## License
 Released under [MIT License](LICENSE).
