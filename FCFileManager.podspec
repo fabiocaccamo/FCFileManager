@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = 'FCFileManager'
-  spec.version      = '1.0.18'
+  spec.version      = '1.0.19'
   spec.license      = { :type => 'MIT' }
   spec.homepage     = 'https://github.com/fabiocaccamo/FCFileManager'
   spec.authors      = { 'Fabio Caccamo' => 'fabio.caccamo@gmail.com' }
