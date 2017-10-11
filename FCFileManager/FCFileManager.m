@@ -1193,7 +1193,7 @@
         free(ukeys);
     }
 
-    return [NSDictionary dictionaryWithObjects:[values allKeys] forKeys:[values allValues]];
+    return [NSDictionary dictionaryWithObjects:[values allValues] forKeys:[values allKeys]];
 }
 
 
